@@ -1,0 +1,33 @@
+import numpy as np
+a = np.array([(1,2,3),(3,4,4)]) #these lines shows how to create numpy arrays from python list
+print (a)
+print(type(a))
+
+b = np.array([1,2,3]) #these lines shows how to create numpy arrays from python list
+print (a)
+print (b)
+
+print(b.dtype) #Checks the data type (like int64, float32) stored in the array.
+
+print(a.ndim) #shows the number of dimensions a[2D]
+print(b.ndim) #shows the number of dimensions a[1D]
+
+print(a.shape) #Shows array shape (how many rows and columns).
+b.shape
+a.dtype
+
+# if we want to specify the size of it, we can while declaring the array
+a = np.array([(1,2,3),(3,4,4)], dtype='int16')
+print(a.dtype)  #tells us the data type int64, float32
+
+# get itemsize, in bytes
+print(a.itemsize) #Shows bytes used per item.
+
+# if i increase the dtype size to int 32, i will get itemsize as 4
+a = np.array([(1,2,3),(3,4,4)], dtype = 'int32')
+print(a.itemsize)
+print(a.size) #gives the total number of elements.
+
+# get the total size or number of bytes
+print(a.size *a.itemsize)
+print(a.nbytes) #directly tells you total memory usage in bytes.
