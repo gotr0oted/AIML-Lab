@@ -1,0 +1,35 @@
+print("\n" + "="*60)
+print("AIM 3: Data Cleaning and Preprocessing")
+print("="*60)
+
+data_dirty = {
+    'Feature1': [1, 2, np.nan, 4, 5, 100],
+    'Feature2': [10, np.nan, 30, 40, 50, 60],
+    'Feature3': ['A', 'B', 'A', 'C', 'B', 'A'],
+    'Target': [0, 1, 0, 1, 0, 1]
+}
+
+df_dirty = pd.DataFrame(data_dirty)
+print("\nOriginal Data with Issues:\n", df_dirty)
+
+print("\nMissing Values Count:\n", df_dirty.isnull().sum())
+
+df_clean = df_dirty.copy()
+df_clean['Feature1'].fillna(df_clean['Feature1'].mean(), inplace=True)
+df_clean['Feature2'].fillna(df_clean['Feature2'].median(), inplace=True)
+
+print("\nData After Handling Missing Values:\n", df_clean)
+
+
+from sklearn.preprocessing import LabelEncoder
+
+le = LabelEncoder()
+df_clean['Feature3_Encoded'] = le.fit_transform(df_clean['Feature3'])
+print("\nData with Encoded Categories:\n", df_clean)
+
+from sklearn.preprocessing import StandardScaler
+
+scaler = StandardScaler()
+features_to_scale = ['Feature1', 'Feature2']
+df_clean[features_to_scale] = scaler.fit_transform(df_clean[features_to_scale])
+print("\nData After Scaling:\n", df_clean)
