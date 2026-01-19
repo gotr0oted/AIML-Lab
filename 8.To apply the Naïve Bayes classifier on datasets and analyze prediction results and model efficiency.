@@ -1,0 +1,25 @@
+from sklearn.naive_bayes import GaussianNB
+
+print("\n" + "="*60)
+print("AIM 8: Naïve Bayes Classifier")
+print("="*60)
+
+
+nb_model = GaussianNB()
+nb_model.fit(X_train, y_train)
+
+
+y_pred_nb = nb_model.predict(X_test)
+
+
+accuracy_nb = accuracy_score(y_test, y_pred_nb)
+conf_matrix_nb = confusion_matrix(y_test, y_pred_nb)
+
+print(f"\nNaïve Bayes Results:")
+print(f"Accuracy: {accuracy_nb:.4f}")
+print(f"\nConfusion Matrix:\n{conf_matrix_nb}")
+print(f"\nClassification Report:\n{classification_report(y_test, y_pred_nb, target_names=iris.target_names)}")
+
+
+y_pred_proba = nb_model.predict_proba(X_test)
+print(f"\nSample Prediction Probabilities (first 5 samples):\n{y_pred_proba[:5]}")
