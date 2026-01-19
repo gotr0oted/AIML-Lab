@@ -1,0 +1,42 @@
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import confusion_matrix, accuracy_score
+
+print("\n" + "="*60)
+print("AIM 7: K-Nearest Neighbors (KNN)")
+print("="*60)
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+knn = KNeighborsClassifier(n_neighbors=5)
+knn.fit(X_train_scaled, y_train)
+
+y_pred_knn = knn.predict(X_test_scaled)
+
+accuracy_knn = accuracy_score(y_test, y_pred_knn)
+conf_matrix_knn = confusion_matrix(y_test, y_pred_knn)
+
+print(f"\nKNN Results (k=5):")
+print(f"Accuracy: {accuracy_knn:.4f}")
+print(f"\nConfusion Matrix:\n{conf_matrix_knn}")
+print(f"\nClassification Report:\n{classification_report(y_test, y_pred_knn, target_names=iris.target_names)}")
+
+k_values = range(1, 21)
+accuracies = []
+
+for k in k_values:
+    knn_temp = KNeighborsClassifier(n_neighbors=k)
+    knn_temp.fit(X_train_scaled, y_train)
+    y_pred_temp = knn_temp.predict(X_test_scaled)
+    accuracies.append(accuracy_score(y_test, y_pred_temp))
+
+plt.figure(figsize=(10, 6))
+plt.plot(k_values, accuracies, marker='o')
+plt.xlabel('k Value')
+plt.ylabel('Accuracy')
+plt.title('KNN Accuracy vs k Value')
+plt.grid(True)
+plt.savefig('knn_k_analysis.png')
+print("\nKNN k-value analysis plot saved as 'knn_k_analysis.png'")
