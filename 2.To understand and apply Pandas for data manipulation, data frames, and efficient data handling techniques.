@@ -1,0 +1,29 @@
+import pandas as pd
+
+print("\n" + "="*60)
+print("AIM 2: Pandas Data Manipulation")
+print("="*60)
+
+data = {
+    'Name': ['Alice', 'Bob', 'Charlie', 'David', 'Eve'],
+    'Age': [25, 30, 35, 40, 28],
+    'Salary': [50000, 60000, 70000, 80000, 55000],
+    'Department': ['HR', 'IT', 'Finance', 'IT', 'HR']
+}
+
+df = pd.DataFrame(data)
+print("\nDataFrame:\n", df)
+
+print("\nDataFrame Info:")
+print(df.info())
+print("\nDescriptive Statistics:\n", df.describe())
+
+print("\nEmployees in IT Department:\n", df[df['Department'] == 'IT'])
+print("\nEmployees with Salary > 60000:\n", df[df['Salary'] > 60000])
+
+
+print("\nAverage Salary by Department:\n", df.groupby('Department')['Salary'].mean())
+
+
+df['Bonus'] = df['Salary'] * 0.1
+print("\nDataFrame with Bonus Column:\n", df)
